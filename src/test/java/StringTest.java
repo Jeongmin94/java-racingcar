@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class StringTest {
 
@@ -43,16 +42,20 @@ class StringTest {
         assertThat(abc.charAt(2)).isEqualTo('c');
     }
 
-    @DisplayName("charAt 메서드 사용했을 때 예외 처리")
+    @DisplayName("주어진 문자열의 길이를 초과하는 지점의 문자를 charAt 메서드를 사용해서 가져올 때 발생하는 exception 테스트")
     @Test
     void charAtWithStringIndexOutOfBoundsExceptionTest() {
         String abc = "abc";
+        int outOfRangeInteger = 3;
 
-        assertThat(abc.length()).isEqualTo(3);
+        assertThat(abc).hasSize(3);
         assertThat(abc.charAt(0)).isEqualTo('a');
 
-        assertThatThrownBy(() -> abc.charAt(3))
+        assertThatThrownBy(() -> abc.charAt(outOfRangeInteger))
                 .isInstanceOf(StringIndexOutOfBoundsException.class)
                 .hasMessageContaining("out of range: 3");
+        assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+                .isThrownBy(() -> abc.charAt(outOfRangeInteger))
+                .withMessage("out of range");
     }
 }
