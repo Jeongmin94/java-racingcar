@@ -28,17 +28,17 @@ class SetTest {
         assertThat(numbers).hasSize(3);
     }
 
-    @DisplayName("contains 메서드 사용해서 set의 데이터 확인")
+    @DisplayName("set의 contains 메서드를 사용해서 ValueSource의 값이 포함되어 있는지 확인")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
-    void containsTest(int value) {
-        assertThat(numbers.contains(value)).isEqualTo(true);
+    void containsValueSourceTest(int value) {
+        assertThat(numbers).contains(value);
     }
 
-    @DisplayName("contains 메서드 사용해서 set의 데이터 확인")
+    @DisplayName("set의 contains 메서드를 사용해서 특정 값이 포함되어 있는지 실제 결과와 예측값을 비교하여 확인")
     @ParameterizedTest
     @CsvSource({"1,true", "2,true", "3,true", "4,false", "5,false"})
-    void containsTestWithCsvSource(int value, boolean expect) {
+    void containsCsvSourceTest(int value, boolean expect) {
         boolean actual = numbers.contains(value);
         assertThat(actual).isEqualTo(expect);
     }
