@@ -37,25 +37,55 @@ class StringTest {
     void charAtTest() {
         String abc = "abc";
 
-        assertThat(abc.charAt(0)).isEqualTo('a');
-        assertThat(abc.charAt(1)).isEqualTo('b');
-        assertThat(abc.charAt(2)).isEqualTo('c');
+        assertThat(charAtWithCustomExceptionMessage(abc, 0)).isEqualTo('a');
+        assertThat(charAtWithCustomExceptionMessage(abc, 1)).isEqualTo('b');
+        assertThat(charAtWithCustomExceptionMessage(abc, 2)).isEqualTo('c');
     }
 
-    @DisplayName("주어진 문자열의 길이를 초과하는 지점의 문자를 charAt 메서드를 사용해서 가져올 때 발생하는 exception 테스트")
+    @DisplayName("[assertThatThrownBy] 문자열의 길이를 초과하는 charAt 메서드 사용시 발생하는 exception 테스트")
     @Test
-    void charAtWithStringIndexOutOfBoundsExceptionTest() {
+    void charAtWithStringIndexOutOfBoundsExceptionAndAssertThatThrownByTest() {
         String abc = "abc";
         int outOfRangeInteger = 3;
 
         assertThat(abc).hasSize(3);
         assertThat(abc.charAt(0)).isEqualTo('a');
 
-        assertThatThrownBy(() -> abc.charAt(outOfRangeInteger))
+        assertThatThrownBy(() -> charAtWithCustomExceptionMessage(abc, outOfRangeInteger))
                 .isInstanceOf(StringIndexOutOfBoundsException.class)
-                .hasMessageContaining("out of range: 3");
+                .hasMessageContaining("최소인덱스")
+                .hasMessageContaining("최대인덱스")
+                .hasMessageContaining("입력인덱스");
+    }
+
+    @DisplayName("[assertThatExceptionOfType] 문자열의 길이를 초과하는 charAt 메서드 사용시 발생하는 exception 테스트")
+    @Test
+    void charAtWithStringIndexOutOfBoundsExceptionAndAssertThatExceptionOfTypeTest() {
+        String abc = "abc";
+        int outOfRangeInteger = 3;
+
+        assertThat(abc).hasSize(3);
+        assertThat(abc.charAt(0)).isEqualTo('a');
+
         assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
-                .isThrownBy(() -> abc.charAt(outOfRangeInteger))
-                .withMessage("out of range");
+                .isThrownBy(() -> charAtWithCustomExceptionMessage(abc, outOfRangeInteger))
+                .withMessageContaining("최소인덱스")
+                .withMessageContaining("최대인덱스")
+                .withMessageContaining("입력인덱스");
+    }
+
+    /**
+     * StringIndexOutOfBoundsException의 메시지에 문자열의 인덱스 정보 포함
+     *
+     * @param value charAt 메서드를 실행할 문자열
+     * @param index charAt 메서드의 매개변수
+     * @return
+     */
+    private char charAtWithCustomExceptionMessage(String value, int index) {
+        try {
+            return value.charAt(index);
+        } catch (RuntimeException e) {
+            throw new StringIndexOutOfBoundsException(String.format("최소인덱스: %d 최대인덱스: %d 입력인덱스: %d", 0, value.length() - 1, index));
+        }
     }
 }
