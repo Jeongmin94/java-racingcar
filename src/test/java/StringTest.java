@@ -44,7 +44,7 @@ class StringTest {
 
     @DisplayName("[assertThatThrownBy] 문자열의 길이를 초과하는 charAt 메서드 사용시 발생하는 exception 테스트")
     @Test
-    void charAtWithStringIndexOutOfBoundsExceptionAndAssertThatThrownByTest() {
+    void charIndexOutOfBoundTest_AssertThatThrownByTest() {
         String abc = "abc";
         int outOfRangeInteger = 3;
 
@@ -60,7 +60,7 @@ class StringTest {
 
     @DisplayName("[assertThatExceptionOfType] 문자열의 길이를 초과하는 charAt 메서드 사용시 발생하는 exception 테스트")
     @Test
-    void charAtWithStringIndexOutOfBoundsExceptionAndAssertThatExceptionOfTypeTest() {
+    void charIndexOutOfBoundTest_AssertThatExceptionOfTypeTest() {
         String abc = "abc";
         int outOfRangeInteger = 3;
 
