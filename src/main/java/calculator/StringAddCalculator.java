@@ -1,42 +1,30 @@
 package calculator;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static utils.StringSplitUtils.stringToNumbers;
 
 public class StringAddCalculator {
-    private static final Pattern EXTRACT_CUSTOM_DELIM_PATTERN = Pattern.compile("(\\/\\/)(.+)(\\\\n)");
-    private static final String DEFAULT_DELIM = ":|,";
-    private static final String CUSTOM_DELIM_PARTITION = "\\n";
+    public int calculate(String value) {
+        String[] numbers = stringToNumbers(value);
 
-    public int calculate(String value) throws RuntimeException {
-        String delim = DEFAULT_DELIM;
-
-        Matcher customDelimMatcher = EXTRACT_CUSTOM_DELIM_PATTERN.matcher(value);
-        if (hasCustomDelim(customDelimMatcher)) {
-            delim = delim + "|" + extractCustomDelim(customDelimMatcher);
-            value = value.substring(value.indexOf(CUSTOM_DELIM_PARTITION) + 2);
-        }
-
-        String[] split = value.split(delim);
-
-        return Arrays.stream(split)
-                .map(it -> {
-                    try {
-                        return Integer.parseInt(it);
-                    } catch (NumberFormatException e) {
-                        throw new RuntimeException("정수 변환 오류. 숫자를 입력해야 합니다.");
-                    }
-                })
+        return Arrays.stream(numbers)
+                .map(StringAddCalculator::parseInt)
                 .mapToInt(Integer::intValue)
                 .sum();
     }
 
-    private String extractCustomDelim(Matcher customDelimMatcher) {
-        return customDelimMatcher.group(2);
-    }
+    private static Integer parseInt(String number) {
+        int parseNum;
+        try {
+            parseNum = Integer.parseInt(number);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(String.format("정수 변환 오류. %s는 정수가 아닙니다.", number));
+        }
 
-    private boolean hasCustomDelim(Matcher customDelimMatcher) {
-        return customDelimMatcher.find();
+        if (parseNum < 0) {
+            throw new RuntimeException(String.format("음수 계산 불가. %d는 음수입니다.", parseNum));
+        }
+        return parseNum;
     }
 }
