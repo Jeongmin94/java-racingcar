@@ -8,10 +8,10 @@ public class RacingManager {
 
     public RacingManager(RacingInfo racingInfo) {
         this.racingInfo = racingInfo;
-        initRacingCarManager(racingInfo.getCarCount());
+        initRacingCarManager(racingInfo);
     }
 
-    public void initRacingCarManager(int carCount) {
+    public void initRacingCarManager(RacingInfo racingInfo) {
         IntStream.range(0, racingInfo.getCarCount())
                 .mapToObj(RacingCar::new)
                 .forEach(racingCarManager::addRacingCar);
