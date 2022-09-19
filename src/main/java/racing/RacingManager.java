@@ -1,29 +1,34 @@
 package racing;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.IntStream;
 
 public class RacingManager {
-    private final List<RacingCar> racingCars = new ArrayList<>();
+    private final RacingCarManager racingCarManager = new RacingCarManager();
     private final RacingInfo racingInfo;
 
     public RacingManager(RacingInfo racingInfo) {
-        initRacingCars(racingInfo.getCarCount());
         this.racingInfo = racingInfo;
+        initRacingCarManager(racingInfo.getCarCount());
     }
 
-    public void initRacingCars(int carCount) {
-        IntStream.range(0, carCount)
+    public void initRacingCarManager(int carCount) {
+        IntStream.range(0, racingInfo.getCarCount())
                 .mapToObj(RacingCar::new)
-                .forEach(racingCars::add);
+                .forEach(racingCarManager::addRacingCar);
     }
 
     public int getCarCount() {
-        return racingCars.size();
+        return racingCarManager.getCarCount();
     }
 
     public int getRaceCount() {
         return racingInfo.getRaceCount();
+    }
+
+    public void forwardCars() {
+        System.out.println("실행 결과");
+        for (int i = 0; i < racingInfo.getRaceCount(); i++) {
+            racingCarManager.forwardCars();
+        }
     }
 }
