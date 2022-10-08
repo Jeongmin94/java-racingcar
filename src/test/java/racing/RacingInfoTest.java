@@ -24,6 +24,6 @@ class RacingInfoTest {
     void racingInfoConstructorWithExceptionTest() {
         assertThatExceptionOfType(NumberFormatException.class)
                 .isThrownBy(() -> new RacingInfo(TEST_CAR_COUNT, "잘못된 raceCount"))
-                .withMessageContaining("raceCount: 잘못된 raceCount");
+                .withMessageContaining("number는 정수가 아닙니다.");
     }
 }

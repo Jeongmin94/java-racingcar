@@ -1,18 +1,17 @@
 package racing;
 
+import utils.ParseUtils;
+
 import java.util.Scanner;
 
 public class RacingInfo {
-    private final int carCount;
-    private final int raceCount;
+    private final Information racingInfo;
 
     public RacingInfo(String carCount, String raceCount) {
-        try {
-            this.carCount = Integer.parseInt(carCount);
-            this.raceCount = Integer.parseInt(raceCount);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException(String.format("carCount와 raceCount는 정수만 허용됩니다. carCount: %s, raceCount: %s", carCount, raceCount));
-        }
+        int participants = ParseUtils.parseInt(carCount);
+        int rounds = ParseUtils.parseInt(raceCount);
+
+        racingInfo = Information.of(participants, rounds);
     }
 
     public static RacingInfo userInputToRacingInfo() {
@@ -22,11 +21,11 @@ public class RacingInfo {
     }
 
     public int getCarCount() {
-        return carCount;
+        return racingInfo.getParticipants();
     }
 
     public int getRaceCount() {
-        return raceCount;
+        return racingInfo.getRounds();
     }
 
     private static String inputCarCount(Scanner scanner) {
