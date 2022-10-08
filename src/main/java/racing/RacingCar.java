@@ -1,14 +1,17 @@
 package racing;
 
+import racing.output.RacingCarOutputView;
+
 public class RacingCar {
-    private static final String MOVE_MARK = "-";
 
     private final int id;
     private int position;
+    private final RacingCarOutputView outputView;
 
     public RacingCar(int id) {
         this.id = id;
         this.position = 0;
+        this.outputView = new RacingCarOutputView();
     }
 
     public void forward() {
@@ -16,10 +19,6 @@ public class RacingCar {
     }
 
     public void printMoveMark() {
-        System.out.print(id + ": ");
-        for (int i = 0; i < position; i++) {
-            System.out.print(MOVE_MARK);
-        }
-        System.out.println();
+        outputView.printRacingCarMove(id, position);
     }
 }
