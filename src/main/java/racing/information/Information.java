@@ -1,4 +1,4 @@
-package racing;
+package racing.information;
 
 public class Information {
     private final int participants;
@@ -13,7 +13,6 @@ public class Information {
         return new Information(participants, rounds);
     }
 
-    // !TODO getter, setter 폐지 예정
     public int getParticipants() {
         return participants;
     }
@@ -35,13 +34,13 @@ public class Information {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj == null) {
+        if (obj == null) {
             return false;
         }
-        if(obj.getClass() != this.getClass()) {
+        if (obj.getClass() != this.getClass()) {
             return false;
         }
-        if(obj == this) {
+        if (obj == this) {
             return true;
         }
         Information i = (Information) obj;

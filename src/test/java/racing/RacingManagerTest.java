@@ -2,6 +2,8 @@ package racing;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racing.information.RacingInfo;
+import racing.manager.RacingManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
