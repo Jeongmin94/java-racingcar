@@ -41,4 +41,30 @@ public class RacingInfo {
         System.out.println("raceCount: " + raceCount);
         return raceCount;
     }
+
+    private boolean isEqualTo(Information information) {
+        return racingInfo.equals(information);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        }
+        if(obj.getClass() != this.getClass()) {
+            return false;
+        }
+        if(obj == this) {
+            return true;
+        }
+        RacingInfo ri = (RacingInfo) obj;
+        return ri.isEqualTo(racingInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int result = 1;
+        return PRIME * result + this.racingInfo.hashCode();
+    }
 }
