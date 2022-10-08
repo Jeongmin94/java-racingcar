@@ -11,21 +11,13 @@ public class RacingInfo {
             this.carCount = Integer.parseInt(carCount);
             this.raceCount = Integer.parseInt(raceCount);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(String.format("carCount와 raceCount는 정수여야 합니다. carCount: %s, raceCount: %s", carCount, raceCount));
+            throw new NumberFormatException(String.format("carCount와 raceCount는 정수만 허용됩니다. carCount: %s, raceCount: %s", carCount, raceCount));
         }
     }
 
     public static RacingInfo userInputToRacingInfo() {
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("자동차 대수는 몇 대 인가요?:");
-            String carCount = scanner.nextLine();
-            System.out.println("racingCars: " + carCount);
-
-            System.out.println("시도할 횟수는 몇 회 인가요?:");
-            String raceCount = scanner.nextLine();
-            System.out.println("raceCount: " + raceCount);
-
-            return new RacingInfo(carCount, raceCount);
+            return new RacingInfo(inputCarCount(scanner), inputRaceCount(scanner));
         }
     }
 
@@ -34,6 +26,20 @@ public class RacingInfo {
     }
 
     public int getRaceCount() {
+        return raceCount;
+    }
+
+    private static String inputCarCount(Scanner scanner) {
+        System.out.println("자동차 대수는 몇 대 인가요?:");
+        String carCount = scanner.nextLine();
+        System.out.println("racingCars: " + carCount);
+        return carCount;
+    }
+
+    private static String inputRaceCount(Scanner scanner) {
+        System.out.println("시도할 횟수는 몇 회 인가요?:");
+        String raceCount = scanner.nextLine();
+        System.out.println("raceCount: " + raceCount);
         return raceCount;
     }
 }
