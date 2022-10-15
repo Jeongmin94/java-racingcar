@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.parser.StringToNumberParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,7 @@ class StringAddCalculatorTest {
     private static final String TEST_NUMBERS_WITH_DEFAULT_DELIM = "1:2,3";
     private static final String TEST_FULL_NUMBERS_WITH_CUSTOM_DELIM = "//;\\n1;2;3";
 
-    private final StringAddCalculator calculator = new StringAddCalculator(new StringToNumberParser());
+    private final StringAddCalculator calculator = new StringAddCalculator();
 
     @DisplayName("기본 구분자로 문자열 덧셈 테스트")
     @Test
