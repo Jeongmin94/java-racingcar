@@ -1,10 +1,12 @@
-import racing.information.RacingInfo;
-import racing.manager.RacingManager;
+import racing.input.InputView;
+import racing.manager.RacingCarManager;
+import racing.output.OutputView;
 
 public class RacingCarApplication {
     public static void main(String[] args) {
-        RacingInfo racingInfo = RacingInfo.userInputToRacingInfo();
-        RacingManager rm = new RacingManager(racingInfo);
-        rm.forwardCars();
+        InputView inputView = new InputView();
+        RacingCarManager rm = inputView.getRacingCarManager();
+        OutputView outputView = inputView.getOutputView();
+        outputView.race(rm);
     }
 }

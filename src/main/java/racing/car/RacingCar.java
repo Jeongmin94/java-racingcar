@@ -1,7 +1,7 @@
 package racing.car;
 
-import racing.output.RacingCarOutputView;
-import utils.RandomUtils;
+import racing.exception.RandomIntegerOutOfRangeException;
+import utils.StringUtils;
 
 public class RacingCar {
 
@@ -15,21 +15,20 @@ public class RacingCar {
         this.position = 0;
     }
 
-    private void movePositionForward() {
+    private void movePosition() {
         position++;
     }
 
-    private void printMoveMark() {
-        RacingCarOutputView.printRacingCarMove(id, position);
-    }
-
-    public void forward(int randomInt) {
-        if (randomInt >= RandomUtils.MAX_RANDOM_VALUE || randomInt < 0) {
-            throw new IllegalArgumentException(String.format("randomInt의 범위가 지정한 범위(0 ~ 9)를 초과했습니다. randomInt: %d, max: %d", randomInt, RandomUtils.MAX_RANDOM_VALUE));
+    public void moveForward(int randomInt) {
+        if (!RandomIntegerOutOfRangeException.validateRandomInteger(randomInt)) {
+            throw new RandomIntegerOutOfRangeException(StringUtils.getInvalidRandomIntMessage(randomInt));
         }
         if (randomInt >= STANDARD_FOR_MOVE) {
-            this.movePositionForward();
+            this.movePosition();
         }
-        this.printMoveMark();
+    }
+
+    public int getPosition() {
+        return position;
     }
 }
