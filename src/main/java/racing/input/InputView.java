@@ -20,16 +20,12 @@ public class InputView {
 
     private String inputCarCount(Scanner scanner) {
         System.out.println("자동차 대수는 몇 대 인가요?:");
-        String carCount = scanner.nextLine();
-        System.out.println("racingCars: " + carCount);
-        return carCount;
+        return scanner.nextLine();
     }
 
     private String inputRaceCount(Scanner scanner) {
         System.out.println("시도할 횟수는 몇 회 인가요?:");
-        String raceCount = scanner.nextLine();
-        System.out.println("raceCount: " + raceCount);
-        return raceCount;
+        return scanner.nextLine();
     }
 
     public int getCarCount() {

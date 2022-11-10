@@ -7,16 +7,10 @@ public class RacingCar {
 
     private static final int STANDARD_FOR_MOVE = 4;
 
-    private final int id;
     private int position;
 
-    public RacingCar(int id) {
-        this.id = id;
+    public RacingCar() {
         this.position = 0;
-    }
-
-    private void movePosition() {
-        position++;
     }
 
     public void moveForward(int randomInt) {
@@ -24,7 +18,7 @@ public class RacingCar {
             throw new RandomIntegerOutOfRangeException(StringUtils.getInvalidRandomIntMessage(randomInt));
         }
         if (randomInt >= STANDARD_FOR_MOVE) {
-            this.movePosition();
+            this.position++;
         }
     }
 
