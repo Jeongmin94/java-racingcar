@@ -22,17 +22,17 @@ public class RacingCarManager {
         racingCars.add(racingCar);
     }
 
+    public void forward(List<Integer> randoms) {
+        for (int car = 0; car < racingCars.size(); car++) {
+            forwardCar(car, randoms.get(car));
+        }
+    }
+
     private void forwardCar(int car, int randomInt) {
         if (!RandomIntegerOutOfRangeException.validateRandomInteger(randomInt)) {
             throw new RandomIntegerOutOfRangeException(StringUtils.getInvalidRandomIntMessage(randomInt));
         }
         racingCars.get(car).moveForward(randomInt);
-    }
-
-    public void forward(List<Integer> randoms) {
-        for (int car = 0; car < racingCars.size(); car++) {
-            forwardCar(car, randoms.get(car));
-        }
     }
 
     public int getCarPositionOf(int idx) {
