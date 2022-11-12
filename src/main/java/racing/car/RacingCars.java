@@ -26,4 +26,29 @@ public class RacingCars {
     public int cars() {
         return racingCars.size();
     }
+
+    @Override
+    public int hashCode() {
+        final int PRIME = 31;
+        int res = 1;
+        return PRIME * res + cars();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        }
+
+        if (obj == this) {
+            return true;
+        }
+
+        if(getClass() != obj.getClass()) {
+            return false;
+        }
+
+        RacingCars rc = (RacingCars) obj;
+        return (cars() == rc.cars());
+    }
 }
